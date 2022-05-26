@@ -1,5 +1,6 @@
 #!/bin/bash
 
+SCRIPT_DIR=$(realpath $(dirname $0))
 
 if [ $# -ne 1 ]; then
 	echo "***************************************"
@@ -7,12 +8,12 @@ if [ $# -ne 1 ]; then
 	echo "***************************************"
 fi
 
-preprocessor.sh $1 .
+"$SCRIPT_DIR"/preprocessor.sh $1 .
 
 if [ $? -ne 0 ]; then
 	exit 1
 fi
 
 cd results
-gnuplot /usr/bin/*.plt 2> /dev/null
+gnuplot "$SCRIPT_DIR"/*.plt
 
